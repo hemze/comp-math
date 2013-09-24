@@ -1,0 +1,98 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.04.0 ] */
+
+/* [wxMaxima: input   start ] */
+/*----
+* vars
+-----*/
+a:5.78$
+b:4.38$
+c:-5.9$
+sub_func:log((3*'a+'c)/'a)$
+/*---------
+ * num err
+-----------*/
+get_err(num):=(
+    exp:0,
+    while num > floor(num) do (
+        num:num*10,
+        exp:exp-1
+    ),
+    10^exp
+)$
+/*------------------
+* multiplication err
+--------------------*/
+mult_err(x,y):=(
+    get_err(x)*abs(y)+get_err(y)*abs(x))$
+/*------------
+* division err
+--------------*/
+div_err(x,y):=mult_err(x,y)/abs(y)^2$
+/*---
+* sum_diff_err
+---*/
+sum_err(x,y):=get_err(x)+get_err(y)$
+/*
+* func err
+*/
+ func_err(func,x):=(
+    sum:0,
+    for i in x do
+      sum:sum+diff(func,i),
+    print(ratsimp(sum)," = ",ev(sum)),
+    ev(sum)
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+abs(ev(sub_func))*get_err(b)+abs(b)*func_err(sub_func,['a,'b]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+mult_err(a,b)+mult_err(b,b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+func_err(sub_func,['a,'c])*abs(b)+get_err(b)*abs(log((c+2*a)/a));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+(a*b+b*log((c+2*a)/a))/(a*c+b^2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+mult_err(a,b)+%o27;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+mult_err(a,c)+mult_err(b,b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+abs(a*b+b*log((3*a+c)/a))*%o34+abs(a*c+b^2)*%o30;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+a*b+b*log((3*a+c)/a);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+%o35/(a*c+b^2)^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+%o37/abs(%o28);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+mult_err(a,c);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+a*c;
+/* [wxMaxima: input   end   ] */
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
