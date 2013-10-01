@@ -7,15 +7,16 @@ printf(true,"~{~{ ~10a  ~}~%~}",mat ),
 mat = args(matrix([1.1,2,3.33],[4,5,6],[7,8.88,9]))$
 */
 e:2.7182818284$
+fpprintprec:20$fpprec:20$
 sub_func(x):=((e^(x+3)*cos(7*x^4)*sin(x-2))/(1+(tan(x^2/(2+x))^2)))$
 diff_l(func,x):=(
-    ev((apply('func,[float(x[1]-x[2])]) - apply('func,[float(x[1])]))/x[2])
+    float(ev((apply('func,[bfloat(x[1]-x[2])]) - apply('func,[bfloat(x[1])]))/x[2]))
 )$
 diff_r(func,x):=(
-    ev((apply('func,[float(x[1]+x[2])]) - apply('func,[float(x[1])]))/x[2])
+    ev((apply('func,[bfloat(x[1]+x[2])]) - apply('func,[bfloat(x[1])]))/x[2])
 )$
-diff_c(func,x,h):=(
-    ev((apply('func,[float(x[1]+x[2])]) - apply('func,[float(x[1]-x[2])]))/2*x[2])
+diff_c(func,x):=(
+    ev((apply('func,[bfloat(x[1]+x[2])]) - apply('func,[bfloat(x[1]-x[2])]))/2*x[2])
 )$
 and_f(x):=(
     res:-1,
@@ -30,37 +31,71 @@ and_f(x):=(
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+h:[]$dl:[]$dr:[]$dc:[]$
 eps:0.0001$
-dif:1$
-start_eps:0.1$
-i:0.1$
-c:0$
-goon_flag:true$
-while goon_flag do (
-    dif_arr:[],
-    ic:1,
-    c:c+1,
-    print(c),
-    for x:0 step 0.1 thru 2.1 do (
-    /*    print(c,".",ic,"(h=",i,")",": ",diff_l('sub_func,[x,i])),*/
-        if i<0.1 then (
-            dif: abs(diff_l('sub_func,[x,i])-diff_l('sub_func,[x,2*i])),
-            flag:is(dif<eps),
-            /*print("(",dif,")"),*/
-            dif_arr: append(dif_arr,[flag])
+tab_func(dfunc,sfunc,start,end,st):=(
+    dif:1,
+    i:0.1,
+    c:0,
+    goon_flag:true,
+    while goon_flag do (
+        dif_arr:[],
+        ic:1,
+        c:c+1,
+        /*print(c),*/
+        for x:start step st thru end do (
+            /*print(c,".",ic,"(h=",i,")",": ",diff_l('sub_func,[x,i])),*/
+            if i<0.1 then (
+                dif: abs(dfunc('sfunc,[x,i])-dfunc('sfunc,[x,2*i])),
+                flag:is(dif<eps),
+                dif_arr: append(dif_arr,[flag])
+            ),
+            /*print("-------------"),*/
+            ic:ic+1
         ),
-        /*print("-------------"),*/
-        ic:ic+1
-    ),
-    if length(dif_arr)>0 then goon_flag:not(and_f(dif_arr)),
-    print(and_f(dif_arr)),
-    i:i/2
+        if length(dif_arr)>0 then goon_flag:not(and_f(dif_arr)),
+        i:i/2
+    )
 )$
+c;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-debugmode(true);
+diff_l('sub_func,[2,i])-diff_l('sub_func,[2,i*2]);
 /* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+a:0.1$for i:0 step 1 thru 28 do a:a/2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+a;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fpprintprec:20$fpprec:20$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+2+5.551115123125783*10^-18;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+bfloat(i);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+temp(x):=(e^(x+3)*cos(x^5))/(x^4+(atan(3+25*x))^2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+tab_func('diff_c,'temp,0,2,0.1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+c;
+/* [wxMaxima: input   end   ] */
+
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$

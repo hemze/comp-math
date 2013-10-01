@@ -1,0 +1,77 @@
+{VERSION 4 0 "IBM INTEL NT" "4.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Output" -1 
+11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 
+0 0 0 1 0 1 0 2 2 0 1 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "Digit:=10;" }}{PARA 
+11 "" 1 "" {XPPMATH 20 "6#>%&DigitG\"#5" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 25 "f:=exp(x-1)*cos(2*x^2)-2;" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%\"fG,&*&-%$expG6#,&%\"xG\"\"\"F,!\"\"F,-%$cosG6#,$*$)
+F+\"\"#F,F4F,F,F4F-" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "a:=0
+; b:=3;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"aG\"\"!" }}{PARA 11 "" 
+1 "" {XPPMATH 20 "6#>%\"bG\"\"$" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 
+1 0 13 "h:=(b-a)/100;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"hG#\"\"$
+\"$+\"" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 22 "\316\357\360\345\344
+\345\353\350\354 \367\350\361\353\356 \352\356\360\355\345\351" }
+{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 7 "num:=0:
+" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 18 "n:=trunc((b-a)/h);" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"nG\"$+\"" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 103 "for i from 1 to n do\n    if evalf(subs(x=a+h*(
+i-1), f)*subs(x=a+h*i, f))<0 then num:=num+1: end if:\nod:" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 4 "num;" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#\"\"&" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 26 "h:=h/2; n:=t
+runc((b-a)/h);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"hG#\"\"$\"$+#" }
+}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"nG\"$+#" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 116 "num:=0:\nfor i from 1 to n do\n    if evalf(sub
+s(x=a+h*(i-1), f)*subs(x=a+h*i, f))<0 then num:=num+1: end if:\nod:\nn
+um;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#\"\"&" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 26 "h:=h/2; n:=trunc((b-a)/h);" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%\"hG#\"\"$\"$+%" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%
+\"nG\"$+%" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 116 "num:=0:\nfor \+
+i from 1 to n do\n    if evalf(subs(x=a+h*(i-1), f)*subs(x=a+h*i, f))<
+0 then num:=num+1: end if:\nod:\nnum;" }}{PARA 11 "" 1 "" {XPPMATH 20 
+"6#\"\"&" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 26 "h:=h/2; n:=trun
+c((b-a)/h);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"hG#\"\"$\"$+)" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"nG\"$+)" }}}{EXCHG {PARA 0 "> " 0 
+"" {MPLTEXT 1 0 132 "num:=0:\nfor i from 1 to n do\n    if evalf(subs(
+x=a+h*(i-1), f)*subs(x=a+h*i, f))<0 then num:=num+1: end if:\nod:\n# \+
+\367\350\361\353\356 \352\356\360\355\345\351:\nnum;" }}{PARA 11 "" 1 
+"" {XPPMATH 20 "6#\"\"&" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 112 "z - \+
+\354\340\362\360\350\366\340, \361\356\344\345\360\346\340\371\340\377
+ \342 \357\345\360\342\356\354 \361\362\356\353\341\366\345 \353\345
+\342\373\345 \343\360\340\355\350\366\373 \356\362\360\345\347\352\356
+\342, \361\356\344\345\360\346\340\371\350\365 \352\356\360\345\355
+\374, \340 \342\356 \342\362\356\360\356\354 \361\362\356\353\341\366
+\345 - \357\360\340\342\373\345" }{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 
+"> " 0 "" {MPLTEXT 1 0 18 "z:=matrix(num, 2):" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 185 "k:=1:\nfor i from 1 to n do \n    if evalf(subs
+(x=a+h*(i-1), f)*subs(x=a+h*i, f))<0 then \n    z[k, 1]:=evalf(a+h*(i-
+1)):\n    z[k,2]:=evalf(a+h*i):   \n    k:=k+1:\n         \n    end if
+:\nod:" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 26 "\356\362\360\345\347
+\352\350, \361\356\344\345\360\346\340\371\350\345 \352\356\360\345
+\355\374" }{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 
+9 "print(z);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#-%'matrixG6#7'7$$\"+++
+]K<!\"*$\"+++DO<F*7$$\"++++X=F*$\"+++v[=F*7$$\"+++D'R#F*$\"+++++CF*7$$
+\"+++]<EF*$\"+++D@EF*7$$\"+++]iHF*$\"+++DmHF*" }}}{EXCHG {PARA 0 "" 0 
+"" {TEXT -1 5 "\352\356\360\355\350" }{MPLTEXT 1 0 0 "" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 21 "roots_h:=vector(num):" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 236 "for k from 1 to num do\n    a:=z[k
+,1]: b:=z[k,2]:\n    while evalf(abs(subs(x=(a+b)/2, f)))>10^(-7) do\n
+    c:=(a+b)/2;\n    if evalf(subs(x=a, f) * subs(x=c,f))<0 then b:=c;
+ \n    else a:=c; \n    end if;\n    od;\n    roots_h[k]:=(a+b)/2:\nod
+:" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "print(roots_h);" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#-%'vectorG6#7'$\"+j3jK<!\"*$\"+c'pr%=F
+)$\"+&HZ\"*R#F)$\"+\"RU,i#F)$\"+]!*QjHF)" }}}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 46 "\302\373\367\350\361\353\350\354 \347\355\340\367\345\355
+\350\345 \364\363\355\352\366\350\350 \342 \342\373\367\350\361\353
+\345\355\355\373\365 \362\356\367\352\340\365" }{MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 63 "for i from 1 to num do \npri
+nt(evalf(subs(x=roots_h[i],f)));\nod;" }}{PARA 11 "" 1 "" {XPPMATH 20 
+"6#$!#`!\"*" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$!#Z!\"*" }}{PARA 11 "
+" 1 "" {XPPMATH 20 "6#$\"##*!\"*" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$
+\"#]!\"*" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$!#>!\"*" }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "15 0 1" 0 }{VIEWOPTS 1 1 0 1 
+1 1803 1 1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }

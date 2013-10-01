@@ -1,0 +1,107 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+/*common */
+e:2.7182818284$
+func(x):=8*x*e^(-2*x)$
+fpprintprec:5$
+load(interpol)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* lagrange */
+lagrange_int(tfunc,start,end,quant):=(
+    pairs:[],
+    for i:start step end/quant thru end do (
+        pairs:append(pairs,[[i,tfunc(i)]])
+    ),
+    lagrange(pairs)
+)$
+expand(lagrange_int(func,0,2,4));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* newton */
+fd(tfunc,degree,pos,vallist):=(
+    if degree = 1 then (
+        tfunc(vallist[pos+1])-tfunc(vallist[pos])
+    )
+    else if degree = 0 then
+        tfunc(vallist[pos])
+    else
+        fd(tfunc,degree-1,pos+1,vallist) - fd(tfunc,degree-1,pos,vallist)
+)$
+dd(tfunc,order,vallist):=(
+    result:0,
+    for i:1 step 1 thru order+1 do (
+        mid:1,
+        for j:1 step 1 thru order+1 do (
+            if j # i then
+                mid:mid*(vallist[i]-vallist[j])
+        ),
+        result:result+(tfunc(vallist[i])/mid)
+    ),
+    result
+)$
+newton_int(tfunc,degree,vallist):=(
+    result:0,
+    for i:0 step 1 thru degree do (
+            var_diff_mult:1,
+            for k:1 step 1 thru i do (
+                var_diff_mult:var_diff_mult*(x-vallist[k])
+        ),
+        result:result+var_diff_mult*dd(tfunc,i,vallist)
+    ),
+    result
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+expand(newton_int(func,4,makelist(i,i,0,2,0.5)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+max_func_val(tfunc,vallist):=(
+    apply(max,map(tfunc,vallist))
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([func(x),lagrange_int(func,0,2,4),newton_int(func,4,makelist(k,k,0,2,0.5))],[x,0,2]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([func(x),lagrange_int(func,0,2,4)], [x,0,0.5])$
+
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+max_func_val('func,makelist(i,i,0,2,0.5));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+temp(x):=(e^(x+3)*cos(x^5))/(x^4+(atan(3+25*x))^2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+atan(0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+arctan(2);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+bfloat();
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+bfloat();
+/* [wxMaxima: input   end   ] */
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
