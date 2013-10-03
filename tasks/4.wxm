@@ -23,15 +23,16 @@ rect_form_one_iter('func,0.1);
 rect_form_full(tfunc,quant):=(
     goon_flag:true,
     while goon_flag do (
-        print(quant),
         current:rect_form_one_iter(tfunc,quant),
         if quant<0.1 then (
             previous:rect_form_one_iter(tfunc,2*quant),
-            goon_flag:is((current - previous)/3 > eps)
+            goon_flag:is(abs(current - previous)/3 > eps),
+            print(abs(current - previous)/3)
         ),
         quant:quant/2
     ),
-    print(current, "(", previous, ")", " - ", quant)
+    print(current,"/",previous, "(", abs(current - previous)/3, ")", " - ", quant),
+    current
 )$
 /* [wxMaxima: input   end   ] */
 
@@ -40,15 +41,21 @@ rect_form_full('func,0.1);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-ev(integrate(func(x), x, 0, 2));
+richardson_qua(tfunc,quant,order):=(
+    (2^order*(rect_form_full(tfunc,quant)-rect_form_full(tfunc,2*quant)))/(2^order-1)
+)$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-ev(%);
+richardson_qua('func,0.0015625,2);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
 8*(1-3*e^(-2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+rect_form_one_iter('func,2*0.025) - rect_form_one_iter('func,0.025);
 /* [wxMaxima: input   end   ] */
 
 
