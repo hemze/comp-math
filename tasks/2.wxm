@@ -1,5 +1,5 @@
 /* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
-/* [ Created with wxMaxima version 13.04.2 ] */
+/* [ Created with wxMaxima version 12.04.0 ] */
 
 /* [wxMaxima: input   start ] */
 /*printf(true,"~{|~10a~}~%",arg),arg = [f_l,f_r,"f_c"]$
@@ -8,7 +8,7 @@ mat = args(matrix([1.1,2,3.33],[4,5,6],[7,8.88,9]))$
 */
 e:2.7182818284$
 fpprintprec:20$fpprec:20$
-sub_func(x):=((e^(x+3)*cos(7*x^4)*sin(x-2))/(1+(tan(x^2/(2+x))^2)))$
+func(x):=((e^(x+3)*cos(7*x^4)*sin(x-2))/(1+(tan(x^2/(2+x))^2)))$
 diff_l(func,x):=(
     float(ev((apply('func,[bfloat(x[1]-x[2])]) - apply('func,[bfloat(x[1])]))/x[2]))
 )$
@@ -55,33 +55,13 @@ tab_func(dfunc,sfunc,start,end,st):=(
         ),
         if length(dif_arr)>0 then goon_flag:not(and_f(dif_arr)),
         i:i/2
-    )
+    ),
+    c
 )$
-c;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
 diff_l('sub_func,[2,i])-diff_l('sub_func,[2,i*2]);
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-a:0.1$for i:0 step 1 thru 28 do a:a/2;
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-a;
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-fpprintprec:20$fpprec:20$
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-2+5.551115123125783*10^-18;
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-bfloat(i);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -90,10 +70,6 @@ temp(x):=(e^(x+3)*cos(x^5))/(x^4+(atan(3+25*x))^2);
 
 /* [wxMaxima: input   start ] */
 tab_func('diff_c,'temp,0,2,0.1);
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-c;
 /* [wxMaxima: input   end   ] */
 
 

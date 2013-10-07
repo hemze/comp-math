@@ -1,0 +1,95 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+e:2.7182818284$
+func(x):=(x^5+4*(x^4)*e^(-x)+7*x^3-24*x^2+12)$
+start:-4$end:7$
+eps:10^(-7)$
+quant:float((end-start)/100)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+localize_roots(tfunc,tquant):=(
+    rep_counter:1,
+    prev_count:0,
+    goon_flag:true,
+    while goon_flag do (
+        interval_list:[],
+        vallist:makelist(c,c,start,end,tquant),
+        for i:1 thru length(vallist)-1 do (
+            if sign(tfunc(vallist[i])) # sign(tfunc(vallist[i+1])) then (
+                interval_list:append(interval_list,[[vallist[i],vallist[i+1]]])
+            )
+        ),
+        if length(interval_list) = prev_count then
+            rep_counter:rep_counter+1
+        else 
+            rep_counter:1,
+        prev_count:length(interval_list),
+        tquant:tquant/2,
+        goon_flag:not(rep_counter=4)/*,
+        goon_flag:false*/
+    ),
+    interval_list
+)$
+one_int_sol(tfunc,tst,tend):=(
+    goon_flag:true,
+    res:false,
+    if abs(tfunc(tst))<eps then (
+        goon_flag:false,
+        res:tst
+    )   
+    else if abs(tfunc(tend))<eps then (
+        goon_flag:false,
+        res:tend
+    ),
+    while goon_flag do (
+        mid:tst+(tend-tst)*0.5,
+        if abs(tfunc(mid))<eps /*or abs(tend-tst)<eps*/ then (
+            goon_flag:false,
+            res:mid
+        )
+        else (
+            if sign(tfunc(tst)) # sign(tfunc(mid)) then tend:mid
+            else tst:mid
+        )
+    ),
+    res
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+one_int_sol(func,-1.387500000000014,-1.373750000000014);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+find_roots(tfunc,tquant):=(
+    points:localize_roots(tfunc,tquant),
+    roots:[],
+    for i:1 thru length(points) do (
+        roots:append(roots,[one_int_sol(tfunc,points[i][1],points[i][2])])
+    ),
+    roots
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+localize_roots(func,quant);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+find_roots(func,quant);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+makelist(func(x),x,find_roots(func,quant));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+print(is(func(-1.374363289475455)>eps));
+/* [wxMaxima: input   end   ] */
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

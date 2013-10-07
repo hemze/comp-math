@@ -3,11 +3,11 @@
 
 /* [wxMaxima: input   start ] */
 e:2.7182818284$
-func(x):=8*x*%e^(-x)$
+func(x):=8*x*e^(-x)$
 h:0.1$
 eps:0.0001$
 c:0$start:0$end:2$
-rect_form_one_iter(tfunc,quant):=(
+rect_one_step(tfunc,quant):=(
     c:0,
     sum:0,
     for x:start step quant thru end do (
@@ -16,38 +16,37 @@ rect_form_one_iter(tfunc,quant):=(
     ),
     sum*quant
 )$
-rect_form_one_iter('func,0.1);
+rect_one_step('func,0.1);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-rect_form_full(tfunc,quant):=(
+full_func(one_step_func,tfunc,quant,order):=(
     goon_flag:true,
     while goon_flag do (
-        current:rect_form_one_iter(tfunc,quant),
+        current:one_step_func(tfunc,quant),
         if quant<0.1 then (
-            previous:rect_form_one_iter(tfunc,2*quant),
-            goon_flag:is(abs(current - previous)/3 > eps),
-            print(abs(current - previous)/3)
+            previous:one_step_func(tfunc,2*quant),
+            goon_flag:is(abs(current - previous)/(2^order-1) > eps)
         ),
         quant:quant/2
     ),
-    print(current,"/",previous, "(", abs(current - previous)/3, ")", " - ", quant),
+    print(quant*2),
     current
 )$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-rect_form_full('func,0.1);
+full_func(rect_one_step,func,0.1,2);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-richardson_qua(tfunc,quant,order):=(
-    (2^order*(rect_form_full(tfunc,quant)-rect_form_full(tfunc,2*quant)))/(2^order-1)
+richardson_qua(tfull_func,one_step_func,tfunc,quant,order):=(
+    (2^order*tfull_func(one_step_func,tfunc,quant,order)-tfull_func(one_step_func,tfunc,2*quant,order))/(2^order-1)
 )$
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-richardson_qua('func,0.0015625,2);
+richardson_qua(full_func,rect_one_step,func,0.003125,2);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -55,7 +54,30 @@ richardson_qua('func,0.0015625,2);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-rect_form_one_iter('func,2*0.025) - rect_form_one_iter('func,0.025);
+simps_one_step(tfunc,quant):=(
+    result:tfunc(start)+tfunc(end),
+    sum_odd:0,sum_even:0,
+    val_list:makelist(i,i,0,2,quant),
+    iter_end:length(val_list)/2,
+    for i:1 step 1 thru length(val_list) do (
+        if oddp(i) then (
+            sum_odd:sum_odd+tfunc(val_list[i])
+        ) else (
+            if i<=length(val_list)-2 then
+                sum_even:sum_even+tfunc(val_list[i])
+        )
+    ),
+    result:quant*(result+2*sum_even+4*sum_odd)/3
+)$
+simps_one_step('func,h);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+full_func(simps_one_step,func,0.1,4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+richardson_qua(full_func,simps_one_step,func,0.0015625,4);
 /* [wxMaxima: input   end   ] */
 
 
